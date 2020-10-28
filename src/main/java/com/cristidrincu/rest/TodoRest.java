@@ -44,4 +44,13 @@ public class TodoRest {
         Todo updatedTodo = todoService.update(todo);
         return Response.ok(updatedTodo).build();
     }
+
+    @PATCH
+    @Path("status/{id}")
+    public Response markAsComplete(@PathParam("id") Long id) {
+        Todo todo = todoService.find(id);
+        todo.setCompleted(true);
+        todoService.update(todo);
+        return Response.ok(todo).build();
+    }
 }
